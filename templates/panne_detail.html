@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Détail de la panne #{{ panne.id }}</h2>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Équipement :</strong> {{ panne.equipement }}</li>
+    <li class="list-group-item"><strong>Date :</strong> {{ panne.date }}</li>
+    <li class="list-group-item"><strong>Description :</strong> {{ panne.description }}</li>
+    <li class="list-group-item"><strong>Statut :</strong> {{ panne.statut }}</li>
+</ul>
+<a href="{{ url_for('pannes') }}" class="btn btn-secondary mt-3">Retour</a>
+{% endblock %}

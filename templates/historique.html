@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Historique des pannes</h2>
+<ul class="list-group">
+    {% for panne in pannes %}
+    <li class="list-group-item">
+        <strong>#{{ panne.id }}</strong> - {{ panne.equipement }} ({{ panne.date }}) - {{ panne.statut }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
