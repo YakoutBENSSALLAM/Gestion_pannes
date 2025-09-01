@@ -5,7 +5,7 @@
 ![SQLite](https://img.shields.io/badge/SQLite-3.0+-orange.svg)
 ![Status](https://img.shields.io/badge/Status-Completed-success.svg)
 
-Une application web de **Gestion de Maintenance** développée lors d'un stage de 2 mois à l'**Office National de l'Eau Potable (ONEP)**.
+Une application web de **Gestion de Maintenance** développée lors d'un stage de 2 mois à l'**Office National de l'Eau Potable (ONEE-BO)**.
 
 ## 📋 À propos du projet
 
@@ -159,7 +159,7 @@ Les principales tables incluent :
 
 ## 🤝 Contexte du stage
 
-Ce projet a été développé dans le cadre d'un **stage de 2 mois** (Juillet-Août 2024) au sein de l'**Office National de l'Eau Potable (ONEP)**, sous l'encadrement de **Ayoub ZERZOUR**, Chef de station.
+Ce projet a été développé dans le cadre d'un **stage de 2 mois** (Juillet-Août 2025) au sein de l'**Office National de l'Eau Potable (ONEE-BO)**, sous l'encadrement de **Ayoub ZERZOUR**, Chef de station.
 
 ### Objectifs atteints
 - ✅ Digitalisation du processus de gestion des pannes
@@ -190,6 +190,7 @@ Ce projet a été développé dans un cadre éducatif et professionnel.
 ⭐ **N'hésitez pas à mettre une étoile si ce projet vous intéresse !**
 
 📞 **Contact** : Pour toute question sur ce projet, n'hésitez pas à ouvrir une *issue* ou me contacter directement.
+
 
 
 
