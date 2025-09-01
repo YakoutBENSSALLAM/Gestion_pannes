@@ -5,7 +5,7 @@
 ![SQLite](https://img.shields.io/badge/SQLite-3.0+-orange.svg)
 ![Status](https://img.shields.io/badge/Status-Completed-success.svg)
 
-Une application web de **Gestion de Maintenance Assistée par Ordinateur (GMAO)** développée lors d'un stage de 2 mois à l'**Office National de l'Eau Potable (ONEP)**.
+Une application web de **Gestion de Maintenance** développée lors d'un stage de 2 mois à l'**Office National de l'Eau Potable (ONEP)**.
 
 ## 📋 À propos du projet
 
@@ -170,7 +170,7 @@ Ce projet a été développé dans le cadre d'un **stage de 2 mois** (Juillet-Ao
 ## 👨‍💻 Auteur
 
 **Yakout BENSSALLAM**
-- 🎓 Étudiant en Master IT
+- 🎓 Étudiante en Master IT
 - 🏢 Stagiaire ONEP (Juillet-Août 2025)
 - 💼 LinkedIn : BENSSALLAM Yakout
 - 📧 Email : yakoutbenssallam@gmail.com
@@ -181,7 +181,7 @@ Ce projet a été développé dans un cadre éducatif et professionnel.
 
 ## 🙏 Remerciements
 
-- **Ayoub ZERZOUR** - Chef de station et encadrant du stage
+- **M. Ayoub ZERZOUR** - Chef de station et encadrant du stage
 - **Équipe ONEP** - Pour leur accueil et leur confiance
 - **Office National de l'Eau Potable (ONEP)** - Organisme d'accueil
 
@@ -190,5 +190,6 @@ Ce projet a été développé dans un cadre éducatif et professionnel.
 ⭐ **N'hésitez pas à mettre une étoile si ce projet vous intéresse !**
 
 📞 **Contact** : Pour toute question sur ce projet, n'hésitez pas à ouvrir une *issue* ou me contacter directement.
+
 
 
