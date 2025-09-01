@@ -1,0 +1,31 @@
+<h2>Liste des Pannes</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Équipement</th>
+            <th>Description</th>
+            <th>Priorité</th>
+            <th>État</th>
+            <th>Date</th>
+            <th>Cause</th>
+            <th>Solution</th>
+            <th>Observation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for panne in pannes %}
+        <tr>
+            <td>{{ panne[0] }}</td>
+            <td>{{ panne[1] }}</td>
+            <td>{{ panne[2] }}</td>
+            <td>{{ panne[3] }}</td>
+            <td>{{ panne[4] }}</td>
+            <td>{{ panne[5] }}</td>
+            <td>{{ panne[6] }}</td>
+            <td>{{ panne[7] }}</td>
+            <td>{{ panne[8] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

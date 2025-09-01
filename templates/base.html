@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestion des Pannes{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>🔧 ONEE-BO Pannes</h2>
+            </div>
+
+            {% if session.user_id %}
+            <div class="nav-menu">
+                <ul class="nav-list">
+                    {% if session.role == 'admin' %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('dashboard') }}" class="nav-link">📊 Dashboard</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('historique') }}" class="nav-link">📋 Historique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('ajouter_panne') }}" class="nav-link">➕ Ajouter Panne</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-user">
+                <span class="user-info">
+                    👤 {{ session.username }}
+                    <span class="user-role">({{ session.role }})</span>
+                </span>
+                <a href="{{ url_for('logout') }}" class="logout-btn">🚪 Déconnexion</a>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+        <!-- Messages flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <div class="flash-message flash-{{ category }}">
+                {% if category == 'success' %}✅{% elif category == 'error' %}❌{% else %}ℹ️{% endif %}
+                {{ message }}
+                <button class="flash-close" onclick="this.parentElement.style.display='none'">×</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Contenu de la page -->
+        <div class="content-wrapper">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 ONEE-BO AJDIR - Gestion des Pannes | Développé avec Flask</p>
+        </div>
+    </footer>
+
+    <script>
+        // Auto-masquer les messages flash après 5 secondes
+        setTimeout(function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                message.style.opacity = '0';
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, 300);
+            });
+        }, 5000);
+    </script>
+</body>
+</html>

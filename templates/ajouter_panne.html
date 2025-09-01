@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if mode == 'modifier' %}Modifier Panne{% else %}Ajouter Panne{% endif %} - GMAO
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        {% if mode == 'modifier' %}
+        ✏️ Modifier la Panne #{{ panne.id }}
+        {% else %}
+        ➕ Ajouter une Nouvelle Panne
+        {% endif %}
+    </h1>
+    <p>Remplissez tous les champs nécessaires pour enregistrer la panne</p>
+</div>
+
+<div class="form-container">
+    <form method="POST" class="panne-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="equipement">🏭 Équipement *</label>
+                <input type="text" id="equipement" name="equipement" required
+                       placeholder="Ex: Compresseur A1, Pompe B2..."
+                       value="{{ panne.equipement if panne else '' }}">
+            </div>
+
+            <div class="form-group">
+                <label for="priorite">⚠️ Priorité *</label>
+                <select id="priorite" name="priorite" required>
+                    <option value="">Choisir une priorité</option>
+                    <option value="Faible" {% if panne and panne.priorite == 'Faible' %}selected{% endif %}>🟢 Faible</option>
+                    <option value="Moyenne" {% if panne and panne.priorite == 'Moyenne' %}selected{% endif %}>🟡 Moyenne</option>
+                    <option value="Élevée" {% if panne and panne.priorite == 'Élevée' %}selected{% endif %}>🟠 Élevée</option>
+                    <option value="Critique" {% if panne and panne.priorite == 'Critique' %}selected{% endif %}>🔴 Critique</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="etat">📊 État *</label>
+                <select id="etat" name="etat" required>
+                    <option value="">Choisir un état</option>
+                    <option value="En attente" {% if panne and panne.etat == 'En attente' %}selected{% endif %}>⏳ En attente</option>
+                    <option value="En cours" {% if panne and panne.etat == 'En cours' %}selected{% endif %}>🔄 En cours</option>
+                    <option value="Résolue" {% if panne and panne.etat == 'Résolue' %}selected{% endif %}>✅ Résolue</option>
+                    <option value="Fermée" {% if panne and panne.etat == 'Fermée' %}selected{% endif %}>🔒 Fermée</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">📝 Description du problème *</label>
+            <textarea id="description" name="description" required rows="4"
+                      placeholder="Décrivez en détail le problème rencontré...">{{ panne.description if panne else '' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="cause">🔍 Cause identifiée</label>
+            <textarea id="cause" name="cause" rows="3"
+                      placeholder="Quelle est la cause du problème ? (optionnel)">{{ panne.cause if panne else '' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="solution">🔧 Solution appliquée</label>
+            <textarea id="solution" name="solution" rows="3"
+                      placeholder="Quelle solution a été appliquée ? (optionnel)">{{ panne.solution if panne else '' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="observation">💬 Observations</label>
+            <textarea id="observation" name="observation" rows="3"
+                      placeholder="Observations supplémentaires... (optionnel)">{{ panne.observation if panne else '' }}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                {% if mode == 'modifier' %}
+                ✏️ Mettre à jour la panne
+                {% else %}
+                ➕ Ajouter la panne
+                {% endif %}
+            </button>
+            <a href="{{ url_for('historique') }}" class="btn btn-secondary">❌ Annuler</a>
+        </div>
+    </form>
+</div>
+
+<div class="form-help">
+    <h3>💡 Aide</h3>
+    <ul>
+        <li><strong>Équipement :</strong> Nom ou référence de l'équipement en panne</li>
+        <li><strong>Priorité :</strong> Niveau d'urgence (Critique = arrêt de production)</li>
+        <li><strong>État :</strong> Statut actuel de la panne</li>
+        <li><strong>Description :</strong> Description détaillée du problème</li>
+    </ul>
+</div>
+{% endblock %}

@@ -1,11 +1,197 @@
-{% extends 'base.html' %}
+﻿{% extends "base.html" %}
+
+{% block title %}Historique des Pannes{% endblock %}
+
 {% block content %}
-<h2>Historique des pannes</h2>
-<ul class="list-group">
-    {% for panne in pannes %}
-    <li class="list-group-item">
-        <strong>#{{ panne.id }}</strong> - {{ panne.equipement }} ({{ panne.date }}) - {{ panne.statut }}
-    </li>
-    {% endfor %}
-</ul>
+<div class="page-header">
+    <div>
+        <h1>📋 Historique des Pannes</h1>
+        <p>Liste de toutes les pannes enregistrées dans le système</p>
+    </div>
+    <div class="header-actions">
+        <a href="{{ url_for('ajouter_panne') }}" class="btn btn-primary">➕ Nouvelle Panne</a>
+        {% if session.role == 'admin' %}
+        <div class="export-buttons">
+            <a href="{{ url_for('export_excel') }}" class="btn btn-success">📊 Export Excel</a>
+            <a href="{{ url_for('export_pdf') }}" class="btn btn-danger">📄 Export PDF</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if pannes %}
+<div class="table-container">
+    <table class="pannes-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Équipement</th>
+                <th>Description</th>
+                <th>Priorité</th>
+                <th>État</th>
+                <th>Date</th>
+                <th>Créé par</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for panne in pannes %}
+            <tr class="panne-row panne-{{ panne.etat.lower().replace(' ', '-').replace('é', 'e') }}">
+                <td class="panne-id">#{{ panne.id }}</td>
+                <td class="panne-equipement">
+                    <strong>{{ panne.equipement }}</strong>
+                </td>
+                <td class="panne-description">
+                    <div class="description-preview">
+                        {{ panne.description[:80] }}{% if panne.description|length > 80 %}...{% endif %}
+                    </div>
+                    {% if panne.description|length > 80 %}
+                    <div class="description-full" style="display: none;">
+                        {{ panne.description }}
+                    </div>
+                    <button class="toggle-description" onclick="toggleDescription(this)">Voir plus</button>
+                    {% endif %}
+                </td>
+                <td class="panne-priorite">
+                    <span class="priority-badge priority-{{ panne.priorite.lower() }}">
+                        {% if panne.priorite == 'Critique' %}🔴
+                        {% elif panne.priorite == 'Élevée' %}🟠
+                        {% elif panne.priorite == 'Moyenne' %}🟡
+                        {% else %}🟢
+                        {% endif %}
+                        {{ panne.priorite }}
+                    </span>
+                </td>
+                <td class="panne-etat">
+                    <span class="status-badge status-{{ panne.etat.lower().replace(' ', '-').replace('é', 'e') }}">
+                        {% if panne.etat == 'En attente' %}⏳
+                        {% elif panne.etat == 'En cours' %}🔄
+                        {% elif panne.etat == 'Résolue' %}✅
+                        {% else %}🔒
+                        {% endif %}
+                        {{ panne.etat }}
+                    </span>
+                </td>
+                <td class="panne-date">
+                    {{ panne.date_creation.split(' ')[0] }}
+                    <br>
+                    <small>{{ panne.date_creation.split(' ')[1][:5] }}</small>
+                </td>
+                <td class="panne-user">
+                    👤 {{ panne.username }}
+                </td>
+                <td class="panne-actions">
+                    <a href="{{ url_for('modifier_panne', panne_id=panne.id) }}"
+                       class="btn btn-small btn-edit" title="Modifier">✏️</a>
+                    <button class="btn btn-small btn-view"
+                            onclick="showPanneDetails({{ panne.id }})" title="Détails">
+                        👁️
+                    </button>
+                    {% if session.role == 'admin' %}
+                    <div class="export-actions">
+                        <a href="{{ url_for('export_panne_excel', panne_id=panne.id) }}"
+                           class="btn btn-small btn-export-excel" title="Export Excel">📊</a>
+                        <a href="{{ url_for('export_panne_pdf', panne_id=panne.id) }}"
+                           class="btn btn-small btn-export-pdf" title="Export PDF">📄</a>
+                    </div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modale pour les détails de la panne -->
+<div id="panneModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>🔍 Détails de la Panne</h3>
+            <span class="modal-close" onclick="closePanneModal()">&times;</span>
+        </div>
+        <div class="modal-body" id="panneModalBody">
+            <!-- Le contenu sera injecté par JavaScript -->
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="empty-state">
+    <div class="empty-icon">📭</div>
+    <h3>Aucune panne enregistrée</h3>
+    <p>Commencez par ajouter votre première panne au système</p>
+    <a href="{{ url_for('ajouter_panne') }}" class="btn btn-primary">➕ Ajouter une panne</a>
+</div>
+{% endif %}
+
+<script>
+    function toggleDescription(button) {
+        const row = button.closest('tr');
+        const preview = row.querySelector('.description-preview');
+        const full = row.querySelector('.description-full');
+
+        if (full.style.display === 'none') {
+            preview.style.display = 'none';
+            full.style.display = 'block';
+            button.textContent = 'Voir moins';
+        } else {
+            preview.style.display = 'block';
+            full.style.display = 'none';
+            button.textContent = 'Voir plus';
+        }
+    }
+
+    function showPanneDetails(panneId) {
+        // Trouver la ligne correspondante
+        const rows = document.querySelectorAll('tr');
+        let panneData = null;
+
+        // Récupérer les données de la panne depuis le tableau
+        rows.forEach(row => {
+            const idCell = row.querySelector('.panne-id');
+            if (idCell && idCell.textContent === '#' + panneId) {
+                panneData = {
+                    id: panneId,
+                    equipement: row.querySelector('.panne-equipement strong').textContent,
+                    description: row.querySelector('.description-full') ?
+                        row.querySelector('.description-full').textContent :
+                        row.querySelector('.description-preview').textContent,
+                    priorite: row.querySelector('.priority-badge').textContent.trim(),
+                    etat: row.querySelector('.status-badge').textContent.trim(),
+                    date: row.querySelector('.panne-date').textContent.trim(),
+                    user: row.querySelector('.panne-user').textContent.trim()
+                };
+            }
+        });
+
+        if (panneData) {
+            const modalBody = document.getElementById('panneModalBody');
+            modalBody.innerHTML = `
+            <div class="panne-detail">
+                <p><strong>🆔 ID:</strong> #${panneData.id}</p>
+                <p><strong>🏭 Équipement:</strong> ${panneData.equipement}</p>
+                <p><strong>📝 Description:</strong></p>
+                <div class="detail-text">${panneData.description}</div>
+                <p><strong>⚠️ Priorité:</strong> ${panneData.priorite}</p>
+                <p><strong>📊 État:</strong> ${panneData.etat}</p>
+                <p><strong>📅 Date:</strong> ${panneData.date}</p>
+                <p><strong>👤 Créé par:</strong> ${panneData.user}</p>
+            </div>
+        `;
+            document.getElementById('panneModal').style.display = 'block';
+        }
+    }
+
+    function closePanneModal() {
+        document.getElementById('panneModal').style.display = 'none';
+    }
+
+    // Fermer la modale en cliquant à l'extérieur
+    window.onclick = function (event) {
+        const modal = document.getElementById('panneModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
 {% endblock %}
