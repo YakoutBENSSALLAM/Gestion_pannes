@@ -44,7 +44,7 @@ Cette application permet la gestion complète des pannes dans un environnement i
 
 ```
 gmao_pannes/
-├── app.py                 # 🚀 Application principale Flask
+├── app1.py                 # 🚀 Application principale Flask
 ├── init_db.py            # 🏗️ Script d'initialisation de la base de données
 ├── gmao.db               # 🗄️ Base de données SQLite (générée automatiquement)
 ├── static/               # 🎨 Fichiers statiques
@@ -96,7 +96,7 @@ gmao_pannes/
 
 5. **Lancer l'application**
    ```bash
-   python app.py
+   python app1.py
    ```
 
 6. **Accéder à l'application**
@@ -169,11 +169,11 @@ Ce projet a été développé dans le cadre d'un **stage de 2 mois** (Juillet-Ao
 
 ## 👨‍💻 Auteur
 
-**[Votre Nom]**
-- 🎓 Étudiant en [Votre Formation]
-- 🏢 Stagiaire ONEP (Juillet-Août 2024)
-- 💼 LinkedIn : [Votre profil LinkedIn]
-- 📧 Email : [votre.email@domain.com]
+**Yakout BENSSALLAM**
+- 🎓 Étudiant en Master IT
+- 🏢 Stagiaire ONEP (Juillet-Août 2025)
+- 💼 LinkedIn : BENSSALLAM Yakout
+- 📧 Email : yakoutbenssallam@gmail.com
 
 ## 📄 Licence
 
@@ -190,4 +190,5 @@ Ce projet a été développé dans un cadre éducatif et professionnel.
 ⭐ **N'hésitez pas à mettre une étoile si ce projet vous intéresse !**
 
 📞 **Contact** : Pour toute question sur ce projet, n'hésitez pas à ouvrir une *issue* ou me contacter directement.
+
 
