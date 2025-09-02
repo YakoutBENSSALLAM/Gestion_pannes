@@ -116,16 +116,20 @@ gmao_pannes/
 ## 📊 Captures d'écran
 
 ### 🔐 Page de connexion
-*[Insérer capture d'écran de la page login]*
+
+<img width="1080" height="1050" alt="Untitled (1080 x 1070 px) (1080 x 1050 px)" src="https://github.com/user-attachments/assets/bf64a188-51a5-4f59-a0bd-6c8dcef41ba9" />
 
 ### ➕ Ajout de panne
-*[Insérer capture d'écran du formulaire]*
+<img width="1494" height="2085" alt="Untitled design (6)" src="https://github.com/user-attachments/assets/fb288e0e-316e-4e1f-8227-729617766926" />
+
 
 ### 📋 Historique des pannes
-*[Insérer capture d'écran de la liste]*
+<img width="1498" height="1573" alt="Untitled design (5)" src="https://github.com/user-attachments/assets/d069a82d-91f3-421a-a68f-1fdbd1c687dc" />
+
 
 ### 📊 Dashboard administrateur
-*[Insérer capture d'écran du tableau de bord]*
+
+<img width="1913" height="2992" alt="FIG14" src="https://github.com/user-attachments/assets/a8903a8a-558e-4b56-a731-05e8ce1958b3" />
 
 ## 🧪 Tests et validation
 
@@ -190,6 +194,7 @@ Ce projet a été développé dans un cadre éducatif et professionnel.
 ⭐ **N'hésitez pas à mettre une étoile si ce projet vous intéresse !**
 
 📞 **Contact** : Pour toute question sur ce projet, n'hésitez pas à ouvrir une *issue* ou me contacter directement.
+
 
 
 
