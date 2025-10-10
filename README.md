@@ -193,7 +193,8 @@ Ce projet a été développé dans un cadre éducatif et professionnel.
 
 ⭐ **N'hésitez pas à mettre une étoile si ce projet vous intéresse !**
 
-📞 **Contact** : Pour toute question sur ce projet, n'hésitez pas à ouvrir une *issue* ou me contacter directement.
+
+
 
 
 
